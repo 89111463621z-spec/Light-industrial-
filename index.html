@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Отдел продаж Light Industrial</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Продажа помещений Light Industrial в технопарках Санкт-Петербурга: Литовская 16, Индустриальный проспект, Киевское шоссе 95.">
+<link rel="icon" href="assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;1,500&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Отдел продаж — на главную">
+      <img src="assets/img/logo.png" alt="" width="44" height="44">
+      <span>Отдел продаж</span>
+    </a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#lots">Лоты</a>
+      <a href="#objects">Технопарки</a>
+      <a href="#clients">Покупателям и агентам</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+    <a class="header-phone js-phone" href="tel:+79312638588">+7 (931) 263-85-88</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">Light Industrial · Санкт-Петербург</p>
+        <h1>Помещения в&nbsp;технопарках <em>для вашего бизнеса</em></h1>
+        <p class="hero-lead">Три технопарка: Литовская&nbsp;16, Индустриальный проспект и&nbsp;Киевское шоссе&nbsp;95. Планировки, фото и&nbsp;цены по&nbsp;каждому лоту.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#lots">Смотреть лоты</a>
+          <a class="btn btn-ghost js-phone" href="tel:+79312638588">+7 (931) 263-85-88</a>
+        </div>
+      </div>
+      <figure class="hero-media">
+        <img src="assets/img/lit-87/01.jpg" alt="Корпус 3-й очереди технопарка на Литовской, визуализация" width="1600" height="1200">
+        <figcaption>Литовская 16 · 3-я очередь, визуализация</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="figures" aria-label="Коротко в цифрах">
+    <div class="wrap" id="figures"></div>
+  </section>
+
+  <section class="section" id="lots">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Каталог</p>
+          <h2>Лоты в продаже</h2>
+        </div>
+        <p>Нажмите на карточку, чтобы открыть фото, планировку и характеристики.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Фильтры">
+        <div class="chip-group" id="f-object"></div>
+        <div class="chip-group" id="f-area"></div>
+        <span class="count" id="count" aria-live="polite"></span>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="objects" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Технопарки</p>
+          <h2>Где находятся объекты</h2>
+        </div>
+      </div>
+      <div class="objects" id="objects-list"></div>
+    </div>
+  </section>
+
+  <section class="section audience" id="clients">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">С кем работаем</p>
+          <h2>Покупателям, инвесторам и&nbsp;агентам</h2>
+        </div>
+      </div>
+      <div class="aud-grid">
+        <div class="aud">
+          <h3>Покупателям</h3>
+          <ul>
+            <li>Подберём лот под задачу и площадь</li>
+            <li>Пришлём планировку и прайс по помещению</li>
+            <li>Покажем объект на месте</li>
+          </ul>
+        </div>
+        <div class="aud">
+          <h3>Инвесторам</h3>
+          <ul>
+            <li>Готовые помещения в работающих технопарках</li>
+            <li>На Литовской уже работают резиденты</li>
+            <li>Расчёты по объекту — по запросу</li>
+          </ul>
+        </div>
+        <div class="aud">
+          <h3>Агентам</h3>
+          <ul>
+            <li>Фото и планировки по каждому лоту для клиента</li>
+            <li>Ссылка на любой лот — из карточки</li>
+            <li>Условия сотрудничества — по телефону</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap contact">
+      <div class="contact-left">
+        <p class="eyebrow">Контакты</p>
+        <h2 style="font-size:clamp(30px,3.6vw,44px)">Отдел продаж</h2>
+        <a class="contact-phone js-phone" href="tel:+79312638588">+7 (931) 263-85-88</a>
+        <div class="copy-row">
+          <button class="btn btn-ghost" type="button" id="copy-phone">Скопировать номер</button>
+        </div>
+        <p>Расскажите, какая площадь нужна и под какую задачу. Подберём лот и пришлём материалы.</p>
+      </div>
+      <form class="form" id="lead-form" novalidate>
+        <label for="f-name">Имя
+          <input id="f-name" name="name" autocomplete="name" required>
+        </label>
+        <label for="f-tel">Телефон
+          <input id="f-tel" name="tel" type="tel" autocomplete="tel" required>
+        </label>
+        <label for="f-lot">Интересует
+          <select id="f-lot" name="lot"></select>
+        </label>
+        <label for="f-msg">Комментарий
+          <textarea id="f-msg" name="msg"></textarea>
+        </label>
+        <button class="btn btn-primary" type="submit">Отправить заявку</button>
+        <p class="form-msg" id="form-msg" hidden></p>
+        <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="assets/img/logo.png" alt="" width="44" height="44">
+      <span>Отдел продаж</span>
+    </a>
+    <a class="js-phone" href="tel:+79312638588">+7 (931) 263-85-88</a>
+    <small>Light Industrial · Санкт-Петербург</small>
+  </div>
+</footer>
+
+<div class="modal" id="modal" hidden></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
