@@ -193,16 +193,16 @@
     if (s.sale === Infinity && s.sot === Infinity && s.saleT) price.push("<b>" + (o.lots.length > 1 ? "от " : "") + fmt(s.saleT) + " ₽</b><span>продажа</span>");
     if (s.rent < Infinity) price.push("<b>от " + fmt(s.rent) + " ₽/м²</b><span>аренда в месяц</span>");
     else if (s.rentT) price.push("<b>" + fmt(s.rentT) + " ₽</b><span>аренда в месяц</span>");
-    var rows = o.lots.map(function (l) {
+    var ROWS = 20, rows = o.lots.map(function (l, idx) {
       var p = has(l, "sale") ? (l.priceTotal ? fmt(l.priceTotal) + " ₽" : l.pricePerM ? fmt(l.pricePerM) + " ₽/м²" : (l.status === "reserved" ? "—" : "по запросу")) : "";
       var r = has(l, "rent") ? (l.rentTotal ? fmt(l.rentTotal) + " ₽ в мес." : (l.rentFrom ? "от " : "") + (l.rentPerM ? fmt(l.rentPerM) + " ₽/м² в мес." : "по запросу")) : "";
-      return '<tr data-lot="' + l.id + '" tabindex="0"><td><a href="#lot-' + l.id + '">' + esc(l.title) + "</a><small>" + esc([l.building, l.floor].filter(Boolean).join(", ")) + "</small></td>" +
-        '<td class="num">' + at(l.area, l.unit) + "</td><td class=\"num\">" + [p, r].filter(Boolean).join("<br>") + "</td>" +
-        '<td class="num">' + (l.pricePerSot ? fmt(l.pricePerSot) + " ₽/сотка" : l.pricePerM && l.priceTotal ? fmt(l.pricePerM) + " ₽/м²" : (l.vat ? esc(l.vat) : (l.rentNote ? esc(l.rentNote) : ""))) + "</td>" +
-        '<td><span class="status st-' + l.status + '">' + STATUS[l.status] + "</span></td></tr>";
+      return '<tr data-lot="' + l.id + '" tabindex="0"' + (idx >= ROWS ? ' class="row-more" hidden' : '') + '><td><a href="#lot-' + l.id + '">' + esc(l.title) + "</a><small>" + esc([l.building, l.floor].filter(Boolean).join(", ")) + "</small></td>" +
+        '<td class="num c-area">' + at(l.area, l.unit) + '</td><td class="num c-price">' + [p, r].filter(Boolean).join("<br>") + "</td>" +
+        '<td class="num c-det">' + (l.pricePerSot ? fmt(l.pricePerSot) + " ₽/сотка" : l.pricePerM && l.priceTotal ? fmt(l.pricePerM) + " ₽/м²" : (l.vat ? esc(l.vat) : (l.rentNote ? esc(l.rentNote) : ""))) + "</td>" +
+        '<td class="c-st"><span class="status st-' + l.status + '">' + STATUS[l.status] + "</span></td></tr>";
     }).join("");
     var thumbs = o.gallery.map(function (g, i) { return '<button type="button" data-src="' + g + '" aria-label="Фото ' + (i + 1) + '"' + (i ? "" : ' aria-current="true"') + '><img src="' + g + '" alt="" loading="lazy"></button>'; }).join("");
-    app.innerHTML = crumbs([["Технопарки", "#"], [o.name]]) +
+    app.innerHTML = crumbs([["Объекты", "#"], [o.name]]) +
       '<div class="obj-head"><div><h1>' + esc(o.name) + '</h1><p class="obj-addr">' + PIN + esc(o.address) + "</p></div>" +
       '<div class="tags tags-static">' + dealTags(Object.keys(s.deals)) + "</div></div>" +
       '<div class="obj-top"><div class="gallery"><div class="gallery-main"><img id="g-main" src="' + o.gallery[0] + '" alt="' + esc(o.name) + '"></div><div class="thumbs">' + thumbs + "</div></div>" +
@@ -216,7 +216,7 @@
       '</div><ul class="where">' + o.lines.map(function (x) { return "<li>" + PIN + esc(x) + "</li>"; }).join("") + "</ul></aside></div>" +
       '<p class="obj-lead">' + esc(o.lead) + "</p>" +
       '<div class="facts">' + o.facts.map(function (f) { return '<div class="fact"><b class="num">' + esc(f[0]) + "</b><span>" + esc(f[1]) + "</span></div>"; }).join("") + "</div>" +
-      '<section class="obj-sec" id="obj-lots"><h2>' + (sot(o) ? "Участки" : "Помещения") + '</h2><div class="table-wrap"><table class="lots-table"><thead><tr><th>' + (sot(o) ? "Участок" : "Помещение") + '</th><th>Площадь</th><th>Цена</th><th>Детали</th><th>Статус</th></tr></thead><tbody>' + rows + "</tbody></table></div></section>" +
+      '<section class="obj-sec" id="obj-lots"><h2>' + (sot(o) ? "Участки" : "Помещения") + '</h2><div class="table-wrap"><table class="lots-table"><thead><tr><th>' + (sot(o) ? "Участок" : "Помещение") + '</th><th>Площадь</th><th>Цена</th><th>Детали</th><th>Статус</th></tr></thead><tbody>' + rows + "</tbody></table></div>" + (o.lots.length > ROWS ? '<div class="more"><button type="button" class="btn btn-ghost" data-rows>Показать все ' + o.lots.length + "</button></div>" : "") + "</section>" +
       '<div class="obj-cols">' +
       '<section class="obj-sec"><h2>Характеристики</h2><dl class="spec-list">' + o.specs.map(function (x) { return "<div><dt>" + esc(x[0]) + "</dt><dd>" + esc(x[1]) + "</dd></div>"; }).join("") + "</dl></section>" +
       (o.stages ? '<section class="obj-sec"><h2>Очереди и сроки</h2><dl class="spec-list">' + o.stages.map(function (x) { return "<div><dt>" + esc(x[0]) + " · " + esc(x[1]) + "</dt><dd>" + esc(x[2]) + "</dd></div>"; }).join("") + "</dl></section>" : "") +
@@ -312,6 +312,7 @@
     }
     var b;
     if ((b = t.closest("[data-view]"))) { st.view = b.dataset.view; st.limit = 24; return renderCatalog(); }
+    if ((b = t.closest("[data-rows]"))) { document.querySelectorAll(".row-more").forEach(function (r) { r.hidden = false; }); b.parentNode.remove(); return; }
     if (t.closest("[data-more]")) { st.limit += 24; return renderCatalog(); }
     if ((b = t.closest("[data-layout]"))) { st.layout = b.dataset.layout; try { localStorage.setItem("li-layout", JSON.stringify(st.layout)); } catch (x) {} return renderCatalog(); }
     if ((b = t.closest("[data-map]"))) {
@@ -388,6 +389,11 @@
   $("f-reset").addEventListener("click", function () { resetFilters(); onFilter(); });
   app.addEventListener("change", function (e) { if (e.target.id === "sort") { st.sort = e.target.value; renderCatalog(); } });
 
+  /* mobile menu */
+  var menu = $("mobile-menu"), mbtn = $("menu-btn");
+  mbtn.addEventListener("click", function () { var open = menu.hidden; menu.hidden = !open; mbtn.setAttribute("aria-expanded", String(open)); });
+  menu.addEventListener("click", function (e) { if (e.target.closest("a")) { menu.hidden = true; mbtn.setAttribute("aria-expanded", "false"); } });
+
   /* mobile filters toggle */
   $("filters-toggle").addEventListener("click", function () {
     var open = $("filters").classList.toggle("open");
@@ -405,7 +411,7 @@
 
   /* footer */
   $("footer-cols").innerHTML =
-    '<div><h4>Технопарки</h4>' + S.objects.map(function (o) { return '<a href="#obj-' + o.id + '">' + esc(o.name) + "</a>"; }).join("") + "</div>" +
+    '<div><h4>Объекты</h4>' + S.objects.map(function (o) { return '<a href="#obj-' + o.id + '">' + esc(o.name) + "</a>"; }).join("") + "</div>" +
     '<div><h4>Предложения</h4><a href="#" data-nav="sale">Продажа помещений</a><a href="#" data-nav="rent">Аренда помещений</a><a href="#offers">Все предложения</a></div>' +
     '<div><h4>Покупателям и инвесторам</h4><a href="#obj-lit">Рассрочка и ипотека — Технопарк l618</a><a href="#about">Что такое Light Industrial</a></div>' +
     '<div><h4>Отдел продаж</h4><a class="js-phone" href="' + S.phoneHref + '">' + S.phone + "</a></div>";

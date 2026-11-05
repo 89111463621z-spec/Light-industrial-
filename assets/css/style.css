@@ -308,3 +308,39 @@ main { padding-block: 18px 64px; outline: none; }
 .lead-form .b24-form-btn:hover { background: #36536B !important; }
 .lead-form .b24-form-sign, .lead-form .b24-form-sign * { color: #8A97A3 !important; }
 .lead-form input[type="checkbox"] { background: #FFFFFF !important; accent-color: #44647F; }
+
+/* Mobile menu */
+.menu-btn { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); cursor: pointer; padding: 12px 11px; flex-direction: column; justify-content: space-between; }
+.menu-btn span { display: block; height: 2px; background: var(--ink); border-radius: 1px; }
+.mobile-menu { display: grid; border-top: 1px solid var(--line); background: var(--surface); padding: 6px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); }
+.mobile-menu a { text-decoration: none; font-weight: 600; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.mobile-menu a:last-child { border-bottom: 0; }
+@media (min-width: 961px) { .mobile-menu { display: none !important; } }
+@media (max-width: 960px) {
+  .menu-btn { display: flex; }
+  .header-phone { margin-left: auto; padding: 9px 12px; }
+}
+@media (max-width: 380px) { .header-phone { font-size: 14px; padding: 9px 10px; } }
+
+.obj-sec .more { margin-top: 4px; }
+
+/* Phone: lots table as compact rows, facts in two columns, specs stacked */
+@media (max-width: 640px) {
+  .table-wrap { overflow: visible; }
+  .lots-table { min-width: 0; }
+  .lots-table thead { display: none; }
+  .lots-table tbody tr:not([hidden]) { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+  .lots-table tbody tr:last-child { border-bottom: 0; }
+  .lots-table td { padding: 0; border: 0; }
+  .lots-table td:first-child { grid-column: 1 / -1; }
+  .lots-table .c-area { color: var(--muted); }
+  .lots-table .c-price { text-align: right; font-weight: 600; grid-column: 2; grid-row: 2; }
+  .lots-table .c-det { grid-column: 1; grid-row: 3; color: var(--muted); font-size: 13px; }
+  .lots-table .c-st { grid-column: 2; grid-row: 3; text-align: right; }
+  .facts { grid-template-columns: 1fr 1fr; }
+  .fact { border-bottom: 1px solid var(--line); }
+  .fact b { font-size: 22px; }
+  .spec-list div { flex-direction: column; gap: 2px; }
+  .spec-list dd { text-align: left; }
+}
+@media (max-width: 640px) { .map-frame { height: 340px; } }
