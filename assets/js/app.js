@@ -127,7 +127,7 @@
     }).join("") + "</ul>";
     var frame = embedded
       ? '<div class="map-stub"><b>Карта</b><span>Яндекс Карта появится на опубликованном сайте. В превью внешние карты недоступны.</span></div>'
-      : '<iframe class="map-frame" title="Карта: ' + esc(cur.name) + '" src="https://yandex.ru/map-widget/v1/?text=' + encodeURIComponent(cur.mapQuery) + '&z=15" loading="lazy" allowfullscreen></iframe>';
+      : '<iframe class="map-frame" title="Карта: ' + esc(cur.name) + '" src="https://yandex.ru/map-widget/v1/?mode=search&text=' + encodeURIComponent(cur.mapQuery) + '&z=15" loading="lazy" allowfullscreen></iframe>';
     return '<aside class="map" aria-label="Карта">' + frame + list + "</aside>";
   }
 
