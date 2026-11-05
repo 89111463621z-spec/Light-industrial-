@@ -27,7 +27,7 @@
   function has(l, d) { return l.deal.indexOf(d) >= 0; }
 
   /* ---------- state ---------- */
-  var st = { view: "objects", layout: "list", sort: "default", deal: "all", areaMin: null, areaMax: null, unit: "m", priceMin: null, priceMax: null, object: "all", mapObj: null };
+  var st = { limit: 24, view: "objects", layout: "list", sort: "default", deal: "all", areaMin: null, areaMax: null, unit: "m", priceMin: null, priceMax: null, object: "all", mapObj: null };
   try { var saved = JSON.parse(localStorage.getItem("li-layout") || "null"); if (saved) st.layout = saved; } catch (e) {}
 
   function lotPasses(l) {
@@ -142,7 +142,7 @@
   function renderCatalog() {
     document.body.classList.remove("on-object");
     var lots = visibleLots();
-    var items, count;
+    var items, count, more = "";
     if (st.view === "objects") {
       var groups = S.objects.map(function (o) { return { o: o, lots: lots.filter(function (l) { return l.object === o.id; }) }; }).filter(function (g) { return g.lots.length; });
       if (st.sort === "price-asc" || st.sort === "price-desc") groups.sort(function (a, b) { var x = summary(a.lots).sale, y = summary(b.lots).sale; return st.sort === "price-asc" ? x - y : y - x; });
@@ -158,7 +158,9 @@
       if (st.sort === "price-desc") arr.sort(function (a, b) { var x = pv(a), y = pv(b); return (y === Infinity ? -1 : y) - (x === Infinity ? -1 : x); });
       if (st.sort === "area-asc") arr.sort(function (a, b) { return a.area - b.area; });
       if (st.sort === "area-desc") arr.sort(function (a, b) { return b.area - a.area; });
-      items = arr.map(lotCard).join("");
+      var total = arr.length;
+      items = arr.slice(0, st.limit).map(lotCard).join("");
+      var more = total > st.limit ? '<div class="more"><button type="button" class="btn btn-ghost" data-more>Показать ещё ' + Math.min(24, total - st.limit) + " из " + (total - st.limit) + "</button></div>" : "";
       count = arr.length + " " + plural(arr.length, ["предложение", "предложения", "предложений"]);
       var seen = {}; mapObjs = [];
       arr.forEach(function (l) { if (!seen[l.object]) { seen[l.object] = 1; mapObjs.push(OBJ[l.object]); } });
@@ -175,7 +177,7 @@
       "</select></label></div></div>" +
       '<p class="found" aria-live="polite">Найдено ' + count + "</p>" +
       '<div class="cat-body layout-' + st.layout + '">' +
-      (st.layout !== "map" ? '<div class="grid">' + (items || empty) + "</div>" : "") +
+      (st.layout !== "map" ? '<div class="cat-list"><div class="grid">' + (items || empty) + "</div>" + (st.view === "offers" ? more : "") + "</div>" : "") +
       (st.layout !== "list" ? mapPanel(mapObjs || []) : "") +
       "</div>";
     bindSliders(app);
@@ -307,7 +309,8 @@
       syncForm(); if (/^#obj-/.test(location.hash)) { location.hash = st.view; } else { show(""); } window.scrollTo(0, 0); return;
     }
     var b;
-    if ((b = t.closest("[data-view]"))) { st.view = b.dataset.view; return renderCatalog(); }
+    if ((b = t.closest("[data-view]"))) { st.view = b.dataset.view; st.limit = 24; return renderCatalog(); }
+    if (t.closest("[data-more]")) { st.limit += 24; return renderCatalog(); }
     if ((b = t.closest("[data-layout]"))) { st.layout = b.dataset.layout; try { localStorage.setItem("li-layout", JSON.stringify(st.layout)); } catch (x) {} return renderCatalog(); }
     if ((b = t.closest("[data-map]"))) {
       st.mapObj = b.dataset.map;
@@ -367,7 +370,7 @@
   }
   function resetFilters() { st.deal = "all"; st.object = "all"; st.unit = "m"; st.areaMin = st.areaMax = st.priceMin = st.priceMax = null; syncForm(); }
   function onFilter() {
-    readForm();
+    readForm(); st.limit = 24;
     if (/^#obj-/.test(location.hash)) { location.hash = st.view; return; }
     renderCatalog();
   }

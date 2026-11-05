@@ -146,6 +146,8 @@ main { padding-block: 18px 64px; outline: none; }
 .chips span { font-size: 12px; padding: 3px 8px; border-radius: 5px; background: var(--bg); border: 1px solid var(--line); }
 .where { list-style: none; margin: 0; padding: 10px 0 0; border-top: 1px solid var(--line); display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
 .where li { display: flex; gap: 6px; }
+.cat-list { display: grid; gap: 20px; min-width: 0; }
+.more { display: flex; justify-content: center; }
 .empty { grid-column: 1 / -1; padding: 40px; display: grid; justify-items: center; gap: 14px; color: var(--muted); border: 1px dashed var(--line); border-radius: var(--radius); }
 
 /* Map */
