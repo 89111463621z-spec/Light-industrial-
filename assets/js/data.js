@@ -129,9 +129,21 @@
         lots: [
           {
             id: "kiev-a1", title: "Секция A1", building: "Корпус А", floor: "",
-            area: 579, pricePerM: 115000, priceTotal: null, vat: "НДС отдельно", deal: ["sale"], status: "free",
-            specs: [["Готовность", "100%"], ["Подъезд", "грузовики до 12 м"], ["Парковка", "7 мест входят в стоимость"], ["Остекление", "витражное, входная группа"], ["Условия", "формат оплаты обсуждается индивидуально"]],
-            photos: ["assets/img/kiev-579/01.jpg", "assets/img/kiev-579/05.jpg", "assets/img/kiev-579/02.jpg", "assets/img/kiev-579/03.jpg", "assets/img/kiev-579/04.jpg"]
+            area: 579, pricePerM: 115000, priceTotal: null, vat: "НДС отдельно", deal: ["sale", "rent"], rentPerM: 900, rentNote: "за м² в месяц без НДС, прямой договор без посредников", status: "free",
+            specs: [["Готовность", "100%"], ["Подъезд", "грузовики до 12 м"], ["Парковка", "7 мест входят в стоимость"], ["Остекление", "витражное, входная группа"], ["Условия покупки", "формат оплаты обсуждается индивидуально"]],
+            photos: ["assets/img/kiev-579/01.jpg", "assets/img/kiev-579/plan-a1.jpg", "assets/img/kiev-579/02.jpg", "assets/img/kiev-579/03.jpg", "assets/img/kiev-579/04.jpg"]
+          },
+          {
+            id: "kiev-a8", title: "Секция A8", building: "Корпус А", floor: "",
+            area: 873, deal: ["rent"], rentPerM: 900, rentNote: "за м² в месяц без НДС, прямой договор без посредников", status: "free",
+            specs: [["Готовность", "100%"], ["Тип", "секция с административно-бытовым корпусом"], ["Подъезд", "еврофура до 16,5 м"]],
+            photos: ["assets/img/kiev-1500/02.jpg", "assets/img/kiev-579/plan-a8.jpg", "assets/img/kiev-1500/03.jpg", "assets/img/kiev-1500/04.jpg"]
+          },
+          {
+            id: "kiev-a3a8", title: "Секции A3 + A8", building: "Корпус А", floor: "",
+            area: 1452, deal: ["rent"], rentPerM: 900, rentNote: "за м² в месяц без НДС, прямой договор без посредников", status: "free",
+            specs: [["Готовность", "100%"], ["Состав", "A3 579 м² + A8 873 м²"]],
+            photos: ["assets/img/kiev-1500/01.jpg", "assets/img/kiev-579/plan-a3a8.jpg", "assets/img/kiev-1500/05.jpg", "assets/img/kiev-1500/02.jpg"]
           },
           {
             id: "kiev-1500", title: "Помещение 1 500 м²", building: "", floor: "",
