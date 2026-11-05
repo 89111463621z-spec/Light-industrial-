@@ -294,3 +294,17 @@ main { padding-block: 18px 64px; outline: none; }
   .filters { display: none; padding-top: 0; }
   .filters.open { display: flex; }
 }
+
+/* Bitrix form: always light and readable, regardless of the site theme */
+.lead-form { background: #FFFFFF !important; border-color: #D7DEE5 !important; color-scheme: light; }
+.lead-form .b24-form, .lead-form .b24-form-wrapper, .lead-form .b24-form-content { background: #FFFFFF !important; color: #1B2632 !important; }
+.lead-form .b24-form-control,
+.lead-form input, .lead-form textarea, .lead-form select { background: #F1F3F5 !important; color: #1B2632 !important; border: 1px solid #D7DEE5 !important; }
+.lead-form .b24-form-control-label, .lead-form .b24-form-control-label * { color: #5B6B79 !important; }
+.lead-form .b24-form-field-agreement, .lead-form .b24-form-field-agreement *,
+.lead-form .b24-form-control-desc, .lead-form label { color: #5B6B79 !important; }
+.lead-form .b24-form-field-agreement-link { color: #36536B !important; }
+.lead-form .b24-form-btn { background: #44647F !important; color: #FFFFFF !important; }
+.lead-form .b24-form-btn:hover { background: #36536B !important; }
+.lead-form .b24-form-sign, .lead-form .b24-form-sign * { color: #8A97A3 !important; }
+.lead-form input[type="checkbox"] { background: #FFFFFF !important; accent-color: #44647F; }
