@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Отдел продаж Light Industrial</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Продажа помещений Light Industrial в технопарках Санкт-Петербурга: Литовская 16, Индустриальный проспект, Киевское шоссе 95.">
+<meta name="description" content="Продажа и аренда помещений Light Industrial в Санкт-Петербурге: технопарки, планировки, цены.">
 <link rel="icon" href="assets/img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,151 +15,90 @@
 <body>
 
 <header class="header">
-  <div class="wrap">
-    <a class="brand" href="#top" aria-label="Отдел продаж — на главную">
+  <div class="wrap header-row">
+    <a class="brand" href="#" data-home aria-label="Отдел продаж — на главную">
       <img src="assets/img/logo.png" alt="" width="44" height="44">
       <span>Отдел продаж</span>
     </a>
     <nav class="nav" aria-label="Разделы">
-      <a href="#lots">Лоты</a>
-      <a href="#objects">Технопарки</a>
-      <a href="#clients">Покупателям и агентам</a>
-      <a href="#contact">Контакты</a>
+      <a href="#" data-nav="sale">Продажа</a>
+      <a href="#" data-nav="rent">Аренда</a>
+      <a href="#" data-nav="objects">Технопарки</a>
+      <a href="#about">О формате</a>
     </nav>
     <a class="header-phone js-phone" href="tel:+79312638588">+7 (931) 263-85-88</a>
   </div>
 </header>
 
-<main id="top">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-text">
-        <p class="eyebrow">Light Industrial · Санкт-Петербург</p>
-        <h1>Помещения в&nbsp;технопарках <em>для вашего бизнеса</em></h1>
-        <p class="hero-lead">Три технопарка: Литовская&nbsp;16, Индустриальный проспект и&nbsp;Киевское шоссе&nbsp;95. Планировки, фото и&nbsp;цены по&nbsp;каждому лоту.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#lots">Смотреть лоты</a>
-          <a class="btn btn-ghost js-phone" href="tel:+79312638588">+7 (931) 263-85-88</a>
-        </div>
-      </div>
-      <figure class="hero-media">
-        <img src="assets/img/lit-87/01.jpg" alt="Корпус 3-й очереди технопарка на Литовской, визуализация" width="1600" height="1200">
-        <figcaption>Литовская 16 · 3-я очередь, визуализация</figcaption>
-      </figure>
+<div class="filterbar">
+  <form class="wrap filters" id="filters" role="search" aria-label="Подбор помещения">
+    <label class="f f-deal"><span class="sr">Тип сделки</span>
+      <select id="f-deal">
+        <option value="all">Аренда и продажа</option>
+        <option value="sale">Продажа</option>
+        <option value="rent">Аренда</option>
+      </select>
+    </label>
+    <div class="f f-range" role="group" aria-label="Площадь, м²">
+      <span class="f-label">Площадь, м²</span>
+      <input id="f-area-min" inputmode="numeric" placeholder="от" aria-label="Площадь от">
+      <input id="f-area-max" inputmode="numeric" placeholder="до" aria-label="Площадь до">
     </div>
-  </section>
-
-  <section class="figures" aria-label="Коротко в цифрах">
-    <div class="wrap" id="figures"></div>
-  </section>
-
-  <section class="section" id="lots">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Каталог</p>
-          <h2>Лоты в продаже</h2>
-        </div>
-        <p>Нажмите на карточку, чтобы открыть фото, планировку и характеристики.</p>
-      </div>
-      <div class="filters" role="group" aria-label="Фильтры">
-        <div class="chip-group" id="f-object"></div>
-        <div class="chip-group" id="f-area"></div>
-        <span class="count" id="count" aria-live="polite"></span>
-      </div>
-      <div class="grid" id="grid"></div>
+    <div class="f f-range" role="group" aria-label="Цена">
+      <select id="f-price-unit" aria-label="Единица цены">
+        <option value="m">₽ за м²</option>
+        <option value="total">₽ за всё</option>
+      </select>
+      <input id="f-price-min" inputmode="numeric" placeholder="от" aria-label="Цена от">
+      <input id="f-price-max" inputmode="numeric" placeholder="до" aria-label="Цена до">
     </div>
-  </section>
+    <label class="f"><span class="sr">Технопарк</span>
+      <select id="f-object"></select>
+    </label>
+    <button type="button" class="btn btn-ghost f-reset" id="f-reset">Сбросить</button>
+  </form>
+</div>
 
-  <section class="section" id="objects" style="padding-top:0">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Технопарки</p>
-          <h2>Где находятся объекты</h2>
-        </div>
-      </div>
-      <div class="objects" id="objects-list"></div>
-    </div>
-  </section>
+<main id="app" class="wrap" tabindex="-1"></main>
 
-  <section class="section audience" id="clients">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">С кем работаем</p>
-          <h2>Покупателям, инвесторам и&nbsp;агентам</h2>
-        </div>
-      </div>
-      <div class="aud-grid">
-        <div class="aud">
-          <h3>Покупателям</h3>
-          <ul>
-            <li>Подберём лот под задачу и площадь</li>
-            <li>Пришлём планировку и прайс по помещению</li>
-            <li>Покажем объект на месте</li>
-          </ul>
-        </div>
-        <div class="aud">
-          <h3>Инвесторам</h3>
-          <ul>
-            <li>Готовые помещения в работающих технопарках</li>
-            <li>На Литовской уже работают резиденты</li>
-            <li>Расчёты по объекту — по запросу</li>
-          </ul>
-        </div>
-        <div class="aud">
-          <h3>Агентам</h3>
-          <ul>
-            <li>Фото и планировки по каждому лоту для клиента</li>
-            <li>Ссылка на любой лот — из карточки</li>
-            <li>Условия сотрудничества — по телефону</li>
-          </ul>
-        </div>
-      </div>
+<section class="about" id="about">
+  <div class="wrap about-inner">
+    <h2>Что такое Light Industrial</h2>
+    <div class="about-text" id="about-text">
+      <p>Light Industrial — помещения для лёгкого производства, склада и офиса в одном здании. Каждая секция имеет отдельный вход, ворота и узлы учёта, поэтому бизнес работает независимо от соседей.</p>
+      <p>Такие объекты строят ближе к городу, чем классические склады: сотрудникам проще добираться, а клиенты могут приехать в шоурум или пункт выдачи.</p>
+      <h3>Кому подходит</h3>
+      <ul>
+        <li>Производствам IV–V класса опасности: мастерские, сборка, пищевые цеха, лаборатории.</li>
+        <li>Дистрибьюторам и интернет-магазинам: хранение и комплектация заказов рядом с покупателем.</li>
+        <li>Сервисным компаниям и шоурумам: витрина, офис и склад под одной крышей.</li>
+      </ul>
+      <h3>На что смотреть при выборе</h3>
+      <ul>
+        <li>Высота потолка и нагрузка на пол — определяют, какое оборудование встанет.</li>
+        <li>Электрическая мощность на секцию и возможность её увеличить.</li>
+        <li>Подъезд для грузовиков и еврофур, размер ворот.</li>
+        <li>Форма владения: собственность или аренда, состав платежей за эксплуатацию.</li>
+      </ul>
     </div>
-  </section>
-
-  <section class="section" id="contact">
-    <div class="wrap contact">
-      <div class="contact-left">
-        <p class="eyebrow">Контакты</p>
-        <h2 style="font-size:clamp(30px,3.6vw,44px)">Отдел продаж</h2>
-        <a class="contact-phone js-phone" href="tel:+79312638588">+7 (931) 263-85-88</a>
-        <div class="copy-row">
-          <button class="btn btn-ghost" type="button" id="copy-phone">Скопировать номер</button>
-        </div>
-        <p>Расскажите, какая площадь нужна и под какую задачу. Подберём лот и пришлём материалы.</p>
-      </div>
-      <form class="form" id="lead-form" novalidate>
-        <label for="f-name">Имя
-          <input id="f-name" name="name" autocomplete="name" required>
-        </label>
-        <label for="f-tel">Телефон
-          <input id="f-tel" name="tel" type="tel" autocomplete="tel" required>
-        </label>
-        <label for="f-lot">Интересует
-          <select id="f-lot" name="lot"></select>
-        </label>
-        <label for="f-msg">Комментарий
-          <textarea id="f-msg" name="msg"></textarea>
-        </label>
-        <button class="btn btn-primary" type="submit">Отправить заявку</button>
-        <p class="form-msg" id="form-msg" hidden></p>
-        <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
-      </form>
-    </div>
-  </section>
-</main>
+    <button type="button" class="btn btn-ghost" id="about-toggle" aria-expanded="false" aria-controls="about-text">Читать полностью</button>
+  </div>
+</section>
 
 <footer class="footer">
   <div class="wrap">
-    <a class="brand" href="#top">
-      <img src="assets/img/logo.png" alt="" width="44" height="44">
-      <span>Отдел продаж</span>
-    </a>
-    <a class="js-phone" href="tel:+79312638588">+7 (931) 263-85-88</a>
-    <small>Light Industrial · Санкт-Петербург</small>
+    <div class="footer-cols" id="footer-cols"></div>
+    <div class="footer-bottom">
+      <a class="brand" href="#" data-home>
+        <img src="assets/img/logo.png" alt="" width="44" height="44">
+        <span>Отдел продаж</span>
+      </a>
+      <div class="footer-contacts">
+        <a class="pill js-phone" href="tel:+79312638588">+7 (931) 263-85-88</a>
+        <button type="button" class="pill" id="copy-phone">Скопировать номер</button>
+      </div>
+    </div>
+    <p class="footer-note">Light Industrial · Санкт-Петербург. Информация на сайте не является публичной офертой.</p>
   </div>
 </footer>
 
