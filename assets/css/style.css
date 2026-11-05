@@ -266,3 +266,22 @@ main { padding-block: 18px 64px; outline: none; }
   html { scroll-behavior: auto; }
   .card, .btn { transition: none; }
 }
+
+/* Lead form (Bitrix24 CRM form) */
+.lead { background: var(--accent-soft); border-top: 1px solid var(--line); }
+.lead-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 40px; padding-block: 56px; align-items: start; }
+.lead-text { display: grid; gap: 14px; }
+.lead-text h2 { font-size: clamp(28px, 3.2vw, 40px); }
+.lead-text p { color: var(--muted); max-width: 32em; }
+.lead-phone { font-family: var(--font-display); font-size: 28px; text-decoration: none; font-variant-numeric: tabular-nums; }
+.lead-form { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; min-height: 200px; min-width: 0; }
+.lead-stub { display: grid; gap: 6px; place-content: center; text-align: center; min-height: 260px; color: var(--muted); }
+.lead-stub b { color: var(--ink); font-family: var(--font-display); font-size: 22px; font-weight: 500; }
+@media (max-width: 860px) { .lead-inner { grid-template-columns: 1fr; padding-block: 40px; } }
+/* Bitrix24 form: match site palette, hide duplicate header (title is shown beside the form) */
+.lead-form .b24-form-header { display: none !important; }
+.lead-form .b24-form-wrapper { box-shadow: none !important; border: 0 !important; background: transparent !important; }
+.lead-form .b24-form-btn { background: var(--accent) !important; border-radius: 8px !important; font-family: var(--font-body) !important; font-weight: 600 !important; }
+.lead-form .b24-form-btn:hover { background: var(--accent-strong) !important; }
+.lead-form .b24-form-control { border-radius: 8px !important; font-family: var(--font-body) !important; }
+.lead-form .b24-form-wrapper.b24-form-border-bottom { border-bottom: 0 !important; }

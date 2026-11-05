@@ -211,6 +211,7 @@
       '<div class="aside-price num">' + (price.join("") || "<b>Цена по запросу</b>") + "</div>" +
       '<p class="muted">' + o.lots.length + " " + plural(o.lots.length, ["предложение", "предложения", "предложений"]) + "</p>" +
       '<a class="btn btn-primary js-phone" href="' + S.phoneHref + '">' + S.phone + "</a>" +
+      '<button type="button" class="btn btn-ghost" data-lead>Оставить заявку</button>' +
       '<a class="btn btn-ghost" href="#obj-lots" data-scroll="obj-lots">' + (sot(o) ? "Смотреть участки" : "Смотреть помещения") + '</a>' +
       '</div><ul class="where">' + o.lines.map(function (x) { return "<li>" + PIN + esc(x) + "</li>"; }).join("") + "</ul></aside></div>" +
       '<p class="obj-lead">' + esc(o.lead) + "</p>" +
@@ -254,7 +255,8 @@
       '<dl class="spec-list">' + specs.map(function (s) { return "<div><dt>" + esc(s[0]) + "</dt><dd>" + esc(s[1]) + "</dd></div>"; }).join("") + "</dl>" +
       '<p class="small muted">' + esc(o.address) + "</p>" +
       '<a class="btn btn-primary" href="' + S.phoneHref + '">Позвонить: ' + S.phone + "</a>" +
-      '<a class="btn btn-ghost" href="#obj-' + o.id + '">Все помещения технопарка</a></div></div>';
+      '<button type="button" class="btn btn-ghost" data-lead>Оставить заявку</button>' +
+      '<a class="btn btn-ghost" href="#obj-' + o.id + '">Все помещения объекта</a></div></div>';
     modal.hidden = false;
     document.body.style.overflow = "hidden";
     modal.querySelector(".sheet-close").focus();
@@ -281,7 +283,7 @@
     }
     var wasOpen = !modal.hidden;
     closeLot();
-    if (h === "about") { if (rendered === null) show(""); return; }
+    if (h === "about" || h === "lead") { if (rendered === null) show(""); return; }
     if (h === "offers") st.view = "offers";
     if (h === "objects") st.view = "objects";
     var key = /^obj-/.test(h) && OBJ[h.slice(4)] ? h : "";
@@ -316,6 +318,12 @@
       st.mapObj = b.dataset.map;
       if (document.body.classList.contains("on-object")) return;
       return renderCatalog();
+    }
+    if (t.closest("[data-lead]")) {
+      e.preventDefault();
+      if (!modal.hidden) closeToBase();
+      setTimeout(function () { $("lead").scrollIntoView({ behavior: "smooth" }); }, 60);
+      return;
     }
     if (t.closest("[data-reset]")) { resetFilters(); return renderCatalog(); }
     if ((b = t.closest("[data-scroll]"))) { e.preventDefault(); $(b.dataset.scroll).scrollIntoView({ behavior: "smooth" }); return; }
