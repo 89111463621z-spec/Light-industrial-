@@ -27,7 +27,7 @@
       id: "lit-31-" + unit.toLowerCase().replace("н-", "n"),
       title: "Помещение " + unit, building: "Корпус 3.1", floor: "1 этаж",
       area: area, pricePerM: perM, priceTotal: total, deal: ["sale"], status: "free",
-      specs: [["Высота потолка", "5,38 м; в двусветной зоне 8,98 м"], ["Нагрузка на пол", "5 т"], ["Антресоль", "высота потолка 2,78 м, нагрузка 300 кг"], ["Ворота", "есть"]],
+      specs: [["Высота потолка", "5,38 м или 8,98 м — по плану этажа"], ["Нагрузка на пол", "5 т"], ["Антресоль", "высота потолка 2,78 м, нагрузка 300 кг"], ["Ворота", "есть"]],
       photos: ["assets/img/lit-87/01.jpg", "assets/img/lit-87/05.jpg", "assets/img/lit-87/02.jpg", "assets/img/lit-87/03.jpg", "assets/img/lit-87/04.jpg"]
     };
   }
@@ -85,12 +85,6 @@
           },
           lit22(4, "4Н3", 52.2, 270000, 14094000, "reserved", "2,5 м", "350 кг", L + "plan-22-4.jpg"),
           lit22(4, "4Н4", 117.2, 270000, 31644000, "free", "2,5 м", "350 кг", L + "plan-22-4.jpg"),
-          {
-            id: "lit-21", title: "Корпус 2.1 целиком", building: "Корпус 2.1", floor: "",
-            area: 1308, pricePerM: null, priceTotal: null, deal: ["sale"], status: "reserved",
-            specs: [],
-            photos: ["assets/img/lit-1300/01.jpg", "assets/img/lit-1300/03.jpg", "assets/img/lit-1300/02.jpg"]
-          },
           lit31("1Н-15", 146.01, 39422700, 270000),
           lit31("1Н-16", 90.95, 26375500, 290000),
           lit31("1Н-17", 111.85, 30199500, 270000),
@@ -150,13 +144,13 @@
             photos: ["assets/img/kiev-1500/01.jpg", "assets/img/kiev-579/plan-a3a8.jpg", "assets/img/kiev-1500/05.jpg", "assets/img/kiev-1500/02.jpg", "assets/img/kiev-1500/03.jpg", "assets/img/kiev-1500/04.jpg"]
           },
           {
-            id: "kiev-1496", title: "Помещение с кран-балкой", building: "Отдельное здание", floor: "",
+            id: "kiev-1496", title: "Помещение 1 496 м²", building: "", floor: "",
             area: 1496, pricePerM: 130000, priceTotal: null, vat: "НДС 5% включён", deal: ["sale"], status: "free",
             specs: [["Площадь по уровням", "1 этаж 1 296 м² (18×72 м), второй уровень 200 м²"], ["Высота потолка", "12 м"], ["Нагрузка на пол", "5 т/м²"], ["Кран-балка", "10 т"], ["Оснащение", "покрасочная камера, вентиляция с подогревом"], ["Участок", "25 соток в собственности"], ["Коммуникации", "150 кВт, газ, вода, канализация"]],
             photos: ["assets/img/kiev-1496/02.jpg", "assets/img/kiev-1496/01.jpg", "assets/img/kiev-1496/03.jpg", "assets/img/kiev-1496/04.jpg", "assets/img/kiev-1496/05.jpg"]
           },
           {
-            id: "kiev-3000", title: "Здание 3 000 м²", building: "Отдельное здание", floor: "",
+            id: "kiev-3000", title: "Строение 3 000 м²", building: "", floor: "",
             area: 3000, pricePerM: null, priceTotal: 300000000, deal: ["sale"], status: "free",
             specs: [["Оснащение", "без кран-балки и дополнительных улучшений"]],
             photos: ["assets/img/kiev-3000/03.jpg", "assets/img/kiev-3000/04.jpg", "assets/img/kiev-3000/05.jpg", "assets/img/kiev-3000/06.jpg"]
@@ -207,15 +201,15 @@
       },
       {
         id: "murm",
-        name: "Склад на Мурманском шоссе",
+        name: "Склад, производство — Мурманское 250",
         short: "Мурманское ш., 250",
-        address: "Мурманское шоссе, 250",
-        mapQuery: "Мурманское шоссе, 250",
+        address: "Мурманское 250",
+        mapQuery: "Мурманское 250",
         lines: ["Заезд и площадка для манёвров длинномеров", "Участок 13 соток в собственности, ВРИ «склад»"],
         chips: ["Продажа и аренда", "Участок в собственности"],
         photos: [M + "01s.jpg", M + "02s.jpg", M + "03s.jpg", M + "06s.jpg", M + "05s.jpg"],
         gallery: [M + "01.jpg", M + "02.jpg", M + "03.jpg", M + "04.jpg", M + "05.jpg", M + "06.jpg", M + "07.jpg"],
-        lead: "Отдельно стоящее здание под склад или производство на собственном участке. Продаётся целиком или половиной, сдаётся в аренду целиком.",
+        lead: "Склад, производство. Площадь 540 м² (36 × 15 м), участок 13 соток в собственности, ВРИ «склад». Продажа и аренда.",
         facts: [["540 м²", "здание 36 × 15 м"], ["7 м", "высота в коньке"], ["5 т/м²", "нагрузка на пол"], ["150 кВт", "электрическая мощность"]],
         specs: [
           ["Здание", "36 × 15 м, 540 м²"],
@@ -229,8 +223,8 @@
           ["Участок", "13 соток в собственности, ВРИ «склад»"]
         ],
         lots: [
-          { id: "murm-540", title: "Здание целиком", building: "", floor: "", area: 540, priceTotal: 30000000, pricePerM: null, rentTotal: 380000, rentNote: "в месяц, УСН", deal: ["sale", "rent"], status: "free", specs: [["Размер", "36 × 15 м"], ["Высота в коньке", "7 м"]], photos: [M + "01.jpg", M + "06.jpg", M + "02.jpg", M + "03.jpg", M + "05.jpg"] },
-          { id: "murm-270", title: "Половина здания", building: "", floor: "", area: 270, priceTotal: 16000000, pricePerM: null, deal: ["sale"], status: "free", specs: [], photos: [M + "02.jpg", M + "05.jpg", M + "07.jpg", M + "04.jpg"] }
+          { id: "murm-540", title: "540 м²", building: "", floor: "", area: 540, priceTotal: 30000000, pricePerM: null, rentTotal: 380000, rentNote: "в месяц, УСН", deal: ["sale", "rent"], status: "free", specs: [["Размер", "36 × 15 м"], ["Высота в коньке", "7 м"]], photos: [M + "01.jpg", M + "06.jpg", M + "02.jpg", M + "03.jpg", M + "05.jpg"] },
+          { id: "murm-270", title: "Помещение 270 м²", building: "", floor: "", area: 270, priceTotal: 16000000, pricePerM: null, deal: ["sale"], status: "free", specs: [], photos: [M + "02.jpg", M + "05.jpg", M + "07.jpg", M + "04.jpg"] }
         ]
       },
 

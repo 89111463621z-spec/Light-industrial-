@@ -390,7 +390,7 @@
     '<div><h4>Технопарки</h4>' + S.objects.map(function (o) { return '<a href="#obj-' + o.id + '">' + esc(o.name) + "</a>"; }).join("") + "</div>" +
     '<div><h4>Предложения</h4><a href="#" data-nav="sale">Продажа помещений</a><a href="#" data-nav="rent">Аренда помещений</a><a href="#offers">Все предложения</a></div>' +
     '<div><h4>Покупателям и инвесторам</h4><a href="#obj-lit">Рассрочка и ипотека — Технопарк l618</a><a href="#about">Что такое Light Industrial</a></div>' +
-    '<div><h4>Отдел продаж</h4><a class="js-phone" href="' + S.phoneHref + '">' + S.phone + "</a><span>Агентам — условия по телефону</span></div>";
+    '<div><h4>Отдел продаж</h4><a class="js-phone" href="' + S.phoneHref + '">' + S.phone + "</a></div>";
 
   /* copy phone */
   $("copy-phone").addEventListener("click", function () {
