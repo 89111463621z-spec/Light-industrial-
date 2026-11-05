@@ -388,6 +388,13 @@
   $("f-reset").addEventListener("click", function () { resetFilters(); onFilter(); });
   app.addEventListener("change", function (e) { if (e.target.id === "sort") { st.sort = e.target.value; renderCatalog(); } });
 
+  /* mobile filters toggle */
+  $("filters-toggle").addEventListener("click", function () {
+    var open = $("filters").classList.toggle("open");
+    this.setAttribute("aria-expanded", String(open));
+    this.textContent = open ? "Скрыть фильтры" : "Фильтры";
+  });
+
   /* about collapse */
   $("about-toggle").addEventListener("click", function () {
     var open = this.getAttribute("aria-expanded") === "true";

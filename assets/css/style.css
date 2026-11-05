@@ -285,3 +285,12 @@ main { padding-block: 18px 64px; outline: none; }
 .lead-form .b24-form-btn:hover { background: var(--accent-strong) !important; }
 .lead-form .b24-form-control { border-radius: 8px !important; font-family: var(--font-body) !important; }
 .lead-form .b24-form-wrapper.b24-form-border-bottom { border-bottom: 0 !important; }
+
+/* Mobile: filters collapse behind a toggle */
+.filters-toggle-row { display: none; }
+@media (max-width: 760px) {
+  .filters-toggle-row { display: block; padding-block: 10px; }
+  .filters-toggle { width: 100%; }
+  .filters { display: none; padding-top: 0; }
+  .filters.open { display: flex; }
+}
