@@ -38,7 +38,7 @@
     if (st.priceMin != null || st.priceMax != null) {
       var deals = st.deal === "all" ? l.deal : [st.deal];
       var ok = deals.some(function (d) {
-        var p = d === "sale" ? (st.unit === "m" ? salePerM(l) : saleTotal(l)) : (l.rentPerM ? (st.unit === "m" ? l.rentPerM : l.rentPerM * l.area) : null);
+        var p = d === "sale" ? (st.unit === "m" ? salePerM(l) : saleTotal(l)) : (l.rentPerM ? (st.unit === "m" ? l.rentPerM : l.rentPerM * l.area) : l.rentTotal ? (st.unit === "m" ? l.rentTotal / l.area : l.rentTotal) : null);
         if (p == null) return false;
         return (st.priceMin == null || p >= st.priceMin) && (st.priceMax == null || p <= st.priceMax);
       });
@@ -52,8 +52,10 @@
     lots.forEach(function (l) {
       r.min = Math.min(r.min, l.area); r.max = Math.max(r.max, l.area);
       l.deal.forEach(function (d) { r.deals[d] = 1; });
-      if (has(l, "sale") && l.status === "free") { if (l.pricePerSot) r.sot = Math.min(r.sot, l.pricePerSot); else if (salePerM(l)) r.sale = Math.min(r.sale, salePerM(l)); }
+      if (has(l, "sale") && l.status === "free" && l.priceTotal) r.saleT = Math.min(r.saleT == null ? Infinity : r.saleT, l.priceTotal);
+      if (has(l, "sale") && l.status === "free") { if (l.pricePerSot) r.sot = Math.min(r.sot, l.pricePerSot); else if (l.pricePerM) r.sale = Math.min(r.sale, l.pricePerM); }
       if (has(l, "rent") && l.rentPerM) r.rent = Math.min(r.rent, l.rentPerM);
+      if (has(l, "rent") && l.rentTotal) r.rentT = Math.min(r.rentT == null ? Infinity : r.rentT, l.rentTotal);
     });
     return r;
   }
@@ -77,7 +79,8 @@
       else out.push('<div class="pl"><b class="muted">' + (l.status === "reserved" ? "Забронирован" : "Продажа: цена по запросу") + "</b></div>");
     }
     if (has(l, "rent")) {
-      if (l.rentPerM) out.push('<div class="pl"><b>' + (l.rentFrom ? "от " : "") + fmt(l.rentPerM) + " ₽/м²</b><span>в месяц</span></div>");
+      if (l.rentTotal) out.push('<div class="pl"><b>' + fmt(l.rentTotal) + " ₽</b><span>" + esc(l.rentNote || "в месяц") + "</span></div>");
+      else if (l.rentPerM) out.push('<div class="pl"><b>' + (l.rentFrom ? "от " : "") + fmt(l.rentPerM) + " ₽/м²</b><span>в месяц</span></div>");
       else out.push('<div class="pl"><b class="muted">Аренда: ставка по запросу</b></div>');
     }
     return out.join("");
@@ -88,7 +91,9 @@
     var price = [];
     if (s.sale < Infinity) price.push("от " + fmt(s.sale) + " ₽/м²");
     if (s.sot < Infinity) price.push("от " + fmt(s.sot) + " ₽/сотка");
+    if (s.sale === Infinity && s.sot === Infinity && s.saleT) price.push((lots.length > 1 ? "от " : "") + fmt(s.saleT) + " ₽");
     if (s.rent < Infinity) price.push("аренда от " + fmt(s.rent) + " ₽/м² в месяц");
+    else if (s.rentT) price.push("аренда " + fmt(s.rentT) + " ₽ в месяц");
     return '<article class="card ocard" data-obj="' + o.id + '">' +
       '<div class="card-media">' + slider(o.photos, o.name) + '<div class="tags">' + dealTags(Object.keys(s.deals)) + "</div></div>" +
       '<div class="card-body">' +
@@ -183,10 +188,12 @@
     var price = [];
     if (s.sale < Infinity) price.push("<b>от " + fmt(s.sale) + " ₽/м²</b><span>продажа</span>");
     if (s.sot < Infinity) price.push("<b>от " + fmt(s.sot) + " ₽/сотка</b><span>продажа</span>");
+    if (s.sale === Infinity && s.sot === Infinity && s.saleT) price.push("<b>" + (o.lots.length > 1 ? "от " : "") + fmt(s.saleT) + " ₽</b><span>продажа</span>");
     if (s.rent < Infinity) price.push("<b>от " + fmt(s.rent) + " ₽/м²</b><span>аренда в месяц</span>");
+    else if (s.rentT) price.push("<b>" + fmt(s.rentT) + " ₽</b><span>аренда в месяц</span>");
     var rows = o.lots.map(function (l) {
       var p = has(l, "sale") ? (l.priceTotal ? fmt(l.priceTotal) + " ₽" : l.pricePerM ? fmt(l.pricePerM) + " ₽/м²" : (l.status === "reserved" ? "—" : "по запросу")) : "";
-      var r = has(l, "rent") ? ((l.rentFrom ? "от " : "") + (l.rentPerM ? fmt(l.rentPerM) + " ₽/м² в мес." : "по запросу")) : "";
+      var r = has(l, "rent") ? (l.rentTotal ? fmt(l.rentTotal) + " ₽ в мес." : (l.rentFrom ? "от " : "") + (l.rentPerM ? fmt(l.rentPerM) + " ₽/м² в мес." : "по запросу")) : "";
       return '<tr data-lot="' + l.id + '" tabindex="0"><td><a href="#lot-' + l.id + '">' + esc(l.title) + "</a><small>" + esc([l.building, l.floor].filter(Boolean).join(", ")) + "</small></td>" +
         '<td class="num">' + at(l.area, l.unit) + "</td><td class=\"num\">" + [p, r].filter(Boolean).join("<br>") + "</td>" +
         '<td class="num">' + (l.pricePerSot ? fmt(l.pricePerSot) + " ₽/сотка" : l.pricePerM && l.priceTotal ? fmt(l.pricePerM) + " ₽/м²" : (l.vat ? esc(l.vat) : (l.rentNote ? esc(l.rentNote) : ""))) + "</td>" +
@@ -198,7 +205,7 @@
       '<div class="tags tags-static">' + dealTags(Object.keys(s.deals)) + "</div></div>" +
       '<div class="obj-top"><div class="gallery"><div class="gallery-main"><img id="g-main" src="' + o.gallery[0] + '" alt="' + esc(o.name) + '"></div><div class="thumbs">' + thumbs + "</div></div>" +
       '<aside class="obj-aside"><div class="aside-card">' +
-      '<div class="aside-area num">' + (sot(o) ? fa(s.min / 100) : fa(s.min)) + " — " + atHtml(s.max, o.unit) + "</div>" +
+      '<div class="aside-area num">' + (s.min === s.max ? "" : (sot(o) ? fa(s.min / 100) : fa(s.min)) + " — ") + atHtml(s.max, o.unit) + "</div>" +
       '<div class="aside-price num">' + (price.join("") || "<b>Цена по запросу</b>") + "</div>" +
       '<p class="muted">' + o.lots.length + " " + plural(o.lots.length, ["предложение", "предложения", "предложений"]) + "</p>" +
       '<a class="btn btn-primary js-phone" href="' + S.phoneHref + '">' + S.phone + "</a>" +
