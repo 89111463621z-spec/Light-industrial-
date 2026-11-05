@@ -7,6 +7,7 @@
 (function () {
   var L = "assets/img/obj-lit/";
   var I = "assets/img/obj-ind/";
+  var Z = "assets/img/obj-zu/";
   var litRenders = [L + "01.jpg", L + "02.jpg", L + "03.jpg"];
 
   function lit22(floor, unit, area, perM, total, status, height, load, plan) {
@@ -141,15 +142,9 @@
           },
           {
             id: "kiev-a3a8", title: "Секции A3 + A8", building: "Корпус А", floor: "",
-            area: 1452, deal: ["rent"], rentPerM: 900, rentNote: "за м² в месяц без НДС, прямой договор без посредников", status: "free",
-            specs: [["Готовность", "100%"], ["Состав", "A3 579 м² + A8 873 м²"]],
-            photos: ["assets/img/kiev-1500/01.jpg", "assets/img/kiev-579/plan-a3a8.jpg", "assets/img/kiev-1500/05.jpg", "assets/img/kiev-1500/02.jpg"]
-          },
-          {
-            id: "kiev-1500", title: "Помещение 1 500 м²", building: "", floor: "",
-            area: 1500, pricePerM: 115000, priceTotal: null, vat: "НДС отдельно", deal: ["sale", "rent"], rentPerM: 900, rentNote: "НДС отдельно, плюс эксплуатация 181 ₽/м², электричество и вода по счётчикам", status: "free",
-            specs: [["Нагрузка на пол", "5 т/м²"], ["Парковка", "14 мест"], ["Подъезд", "фуры до 12 м"]],
-            photos: ["assets/img/kiev-1500/01.jpg", "assets/img/kiev-1500/05.jpg", "assets/img/kiev-1500/02.jpg", "assets/img/kiev-1500/03.jpg", "assets/img/kiev-1500/04.jpg"]
+            area: 1452, pricePerM: 115000, priceTotal: null, vat: "НДС отдельно", deal: ["sale", "rent"], rentPerM: 900, rentNote: "за м² в месяц без НДС, плюс эксплуатация 181 ₽/м², электричество и вода по счётчикам; прямой договор без посредников", status: "free",
+            specs: [["Готовность", "100%"], ["Состав", "A3 579 м² + A8 873 м²"], ["Нагрузка на пол", "5 т/м²"], ["Парковка", "14 мест"]],
+            photos: ["assets/img/kiev-1500/01.jpg", "assets/img/kiev-579/plan-a3a8.jpg", "assets/img/kiev-1500/05.jpg", "assets/img/kiev-1500/02.jpg", "assets/img/kiev-1500/03.jpg", "assets/img/kiev-1500/04.jpg"]
           },
           {
             id: "kiev-1496", title: "Помещение с кран-балкой", building: "Отдельное здание", floor: "",
@@ -166,6 +161,47 @@
         ]
       },
 
+      {
+        id: "kiev-zu",
+        name: "Участки «Киевское-95»",
+        short: "Киевское ш., 95 — участки",
+        unit: "sot",
+        address: "Санкт-Петербург, Киевское шоссе, 95",
+        mapQuery: "Санкт-Петербург, Киевское шоссе, 95",
+        lines: ["Зона Build-to-Suit индустриального парка", "10 минут до КАД, первая линия Киевского шоссе", "Рядом аэропорт Пулково"],
+        chips: ["От 0,5 га", "Инженерно подготовлены"],
+        photos: [Z + "map-s.jpg", Z + "aerial-s.jpg"],
+        gallery: [Z + "map.jpg", Z + "aerial.jpg"],
+        lead: "Инженерно подготовленные участки промышленного назначения от 0,5 га в зоне Build-to-Suit индустриального парка «Киевское-95» — под строительство собственного здания.",
+        facts: [["36,5 га", "зона Build-to-Suit"], ["от 665 000 ₽", "за сотку"], ["14 участков", "свободно"], ["150 кВт", "базовая мощность на 0,5 га"]],
+        specs: [
+          ["Электроснабжение", "150 кВт на 0,5 га"],
+          ["Газоснабжение", "15 м³/час на 0,5 га"],
+          ["Водоснабжение", "1 м³/сутки на 0,5 га"],
+          ["Водоотведение", "комбинированная система"],
+          ["Мощности", "возможно увеличение по запросу"],
+          ["Инфраструктура парка", "асфальтовые проезды 8 м, коммуникации под землёй, КПП и видеонаблюдение 24/7"]
+        ],
+        lots: [
+          { id: "zu-15a", title: "Участок 15а", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 5732.0, priceTotal: 38117800, pricePerSot: 665000, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "57,32 сот"], ["Особенность", "участок со зданием 1 462 м²"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-15b", title: "Участок 15б", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 5878.0, priceTotal: null, pricePerSot: null, pricePerM: null, deal: ["sale"], status: "reserved", specs: [["Площадь", "58,78 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-15v", title: "Участок 15в", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 4469.0, priceTotal: null, pricePerSot: null, pricePerM: null, deal: ["sale"], status: "reserved", specs: [["Площадь", "44,69 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-21", title: "Участок 21", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 10763.0, priceTotal: 79646200, pricePerSot: 740000, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "107,63 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-22", title: "Участок 22", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 16365.0, priceTotal: 121101000, pricePerSot: 740000, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "163,65 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-29", title: "Участок 29", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 14533.0, priceTotal: 102457650, pricePerSot: 705000, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "145,33 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-34", title: "Участок 34", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 12950.0, priceTotal: 90002500, pricePerSot: 695000, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "129,5 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-35", title: "Участок 35", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 9459.0, priceTotal: 63375300, pricePerSot: 670000, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "94,59 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-36", title: "Участок 36", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 8419.0, priceTotal: 59480235, pricePerSot: 706500, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "84,19 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-37", title: "Участок 37", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 5297.0, priceTotal: 45024500, pricePerSot: 850000, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "52,97 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-38", title: "Участок 38", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 4779.0, priceTotal: 40621500, pricePerSot: 850000, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "47,79 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-39", title: "Участок 39", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 3816.0, priceTotal: 30737880, pricePerSot: 805500, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "38,16 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-40", title: "Участок 40", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 3410.0, priceTotal: 28303000, pricePerSot: 830000, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "34,1 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-41", title: "Участок 41", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 2918.0, priceTotal: 22760400, pricePerSot: 780000, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "29,18 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-50", title: "Участок 50", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 5212.0, priceTotal: 44302000, pricePerSot: 850000, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "52,12 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-51", title: "Участок 51", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 11628.0, priceTotal: null, pricePerSot: null, pricePerM: null, deal: ["sale"], status: "reserved", specs: [["Площадь", "116,28 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] },
+          { id: "zu-52", title: "Участок 52", building: "Зона Build-to-Suit", floor: "", unit: "sot", area: 8669.0, priceTotal: 69512000, pricePerSot: 800000, pricePerM: null, deal: ["sale"], status: "free", specs: [["Площадь", "86,69 сот"]], photos: [Z + "map.jpg", Z + "aerial.jpg"] }
+        ]
+      },
       {
         id: "ind",
         name: "Qubis Industrial HUB",
