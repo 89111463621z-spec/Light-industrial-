@@ -123,11 +123,11 @@
     var cur = OBJ[st.mapObj] && objs.indexOf(OBJ[st.mapObj]) >= 0 ? OBJ[st.mapObj] : objs[0];
     var list = '<ul class="map-list">' + objs.map(function (o) {
       return '<li><button type="button" class="map-pick" data-map="' + o.id + '" aria-pressed="' + (o === cur) + '">' + PIN + "<span><b>" + esc(o.name) + "</b><small>" + esc(o.address) + "</small></span></button>" +
-        '<a class="map-ext" href="https://yandex.ru/maps/?text=' + encodeURIComponent(o.mapQuery) + '" target="_blank" rel="noopener">Открыть в Яндекс Картах</a></li>';
+        '<a class="map-ext" href="https://yandex.ru/maps/?ll=' + o.coords + '&z=15&pt=' + o.coords + ',pm2rdm&l=map" target="_blank" rel="noopener">Открыть в Яндекс Картах</a></li>';
     }).join("") + "</ul>";
     var frame = embedded
       ? '<div class="map-stub"><b>Карта</b><span>Яндекс Карта появится на опубликованном сайте. В превью внешние карты недоступны.</span></div>'
-      : '<iframe class="map-frame" title="Карта: ' + esc(cur.name) + '" src="https://yandex.ru/map-widget/v1/?mode=search&text=' + encodeURIComponent(cur.mapQuery) + '&z=15" loading="lazy" allowfullscreen></iframe>';
+      : '<iframe class="map-frame" title="Карта: ' + esc(cur.name) + '" src="https://yandex.ru/map-widget/v1/?ll=' + cur.coords + '&z=15&pt=' + cur.coords + ',pm2rdm" loading="lazy" allowfullscreen></iframe>';
     return '<aside class="map" aria-label="Карта">' + frame + list + "</aside>";
   }
 
