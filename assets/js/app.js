@@ -92,7 +92,7 @@
     if (s.sale < Infinity) price.push("от " + fmt(s.sale) + " ₽/м²");
     if (s.sot < Infinity) price.push("от " + fmt(s.sot) + " ₽/сотка");
     if (s.sale === Infinity && s.sot === Infinity && s.saleT) price.push((lots.length > 1 ? "от " : "") + fmt(s.saleT) + " ₽");
-    if (s.rent < Infinity) price.push("аренда от " + fmt(s.rent) + " ₽/м² в месяц");
+    if (s.rent < Infinity) price.push("аренда " + (lots.length > 1 ? "от " : "") + fmt(s.rent) + " ₽/м² в месяц");
     else if (s.rentT) price.push("аренда " + fmt(s.rentT) + " ₽ в месяц");
     return '<article class="card ocard" data-obj="' + o.id + '">' +
       '<div class="card-media">' + slider(o.photos, o.name) + '<div class="tags">' + dealTags(Object.keys(s.deals)) + "</div></div>" +
@@ -191,7 +191,7 @@
     if (s.sale < Infinity) price.push("<b>от " + fmt(s.sale) + " ₽/м²</b><span>продажа</span>");
     if (s.sot < Infinity) price.push("<b>от " + fmt(s.sot) + " ₽/сотка</b><span>продажа</span>");
     if (s.sale === Infinity && s.sot === Infinity && s.saleT) price.push("<b>" + (o.lots.length > 1 ? "от " : "") + fmt(s.saleT) + " ₽</b><span>продажа</span>");
-    if (s.rent < Infinity) price.push("<b>от " + fmt(s.rent) + " ₽/м²</b><span>аренда в месяц</span>");
+    if (s.rent < Infinity) price.push("<b>" + (o.lots.length > 1 ? "от " : "") + fmt(s.rent) + " ₽/м²</b><span>аренда в месяц</span>");
     else if (s.rentT) price.push("<b>" + fmt(s.rentT) + " ₽</b><span>аренда в месяц</span>");
     var ROWS = 20, rows = o.lots.map(function (l, idx) {
       var p = has(l, "sale") ? (l.priceTotal ? fmt(l.priceTotal) + " ₽" : l.pricePerM ? fmt(l.pricePerM) + " ₽/м²" : (l.status === "reserved" ? "—" : "по запросу")) : "";
