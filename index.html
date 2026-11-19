@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Отдел продаж Light Industrial</title>
+<title>Отдел продаж — коммерческая недвижимость</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Продажа и аренда помещений Light Industrial в Санкт-Петербурге: технопарки, планировки, цены.">
+<meta name="description" content="Продажа и аренда коммерческой недвижимости в Санкт-Петербурге и Ленинградской области: Light Industrial, производственные здания, имущественные комплексы, земельные участки.">
 <link rel="icon" href="assets/img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;1,500&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=202611131056">
+<link rel="stylesheet" href="assets/css/style.css?v=202611190846">
 </head>
 <body>
 
@@ -25,7 +25,7 @@
       <a href="#" data-nav="rent">Аренда</a>
       <a href="#" data-nav="objects">Объекты</a>
       <a href="#lead">Заявка</a>
-      <a href="#about">О формате</a>
+      <a href="#about">О каталоге</a>
     </nav>
     <a class="header-phone js-phone" href="tel:+79312638588">+7 (931) 263-85-88</a>
     <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Меню"><span></span><span></span><span></span></button>
@@ -35,7 +35,7 @@
     <a href="#" data-nav="rent">Аренда</a>
     <a href="#" data-nav="objects">Объекты</a>
     <a href="#lead">Оставить заявку</a>
-    <a href="#about">Что такое Light Industrial</a>
+    <a href="#about">О каталоге</a>
   </nav>
 </header>
 
@@ -62,7 +62,10 @@
       <input id="f-price-min" inputmode="numeric" placeholder="от" aria-label="Цена от">
       <input id="f-price-max" inputmode="numeric" placeholder="до" aria-label="Цена до">
     </div>
-    <label class="f"><span class="sr">Технопарк</span>
+    <label class="f"><span class="sr">Тип объекта</span>
+      <select id="f-type"></select>
+    </label>
+    <label class="f"><span class="sr">Объект</span>
       <select id="f-object"></select>
     </label>
     <button type="button" class="btn btn-ghost f-reset" id="f-reset">Сбросить</button>
@@ -93,21 +96,26 @@
 
 <section class="about" id="about">
   <div class="wrap about-inner">
-    <h2>Что такое Light Industrial</h2>
+    <h2>Коммерческая недвижимость в Санкт-Петербурге и Ленинградской области</h2>
     <div class="about-text" id="about-text">
-      <p>Light Industrial — универсальные помещения, где в одном здании можно разместить производство, склад, офис или шоурум. Каждая секция имеет отдельный вход, ворота и узлы учёта, поэтому бизнес работает независимо от соседей.</p>
-      <p>Такие объекты строят ближе к городу, чем классические склады: сотрудникам проще добираться, а клиенты могут приехать в шоурум или пункт выдачи.</p>
-      <p>Кроме Light Industrial, на сайте представлены производственные объекты и земельные участки промышленного назначения.</p>
+      <p>Отдел продаж подбирает коммерческую недвижимость для бизнеса и инвесторов: производственно-складские помещения формата Light Industrial, отдельные производственные здания, имущественные комплексы и земельные участки промышленного назначения. Объекты — в продажу и в аренду.</p>
+      <h3>Что есть в каталоге</h3>
+      <ul>
+        <li>Light Industrial — универсальные помещения, где в одном здании можно разместить производство, склад, офис или шоурум. У каждой секции отдельный вход, ворота и узлы учёта.</li>
+        <li>Производственные и складские здания — отдельно стоящие объекты с подъездом для грузового транспорта.</li>
+        <li>Имущественные комплексы — несколько зданий на одной территории, в том числе с действующими арендаторами.</li>
+        <li>Земельные участки промышленного назначения — под строительство собственного здания.</li>
+      </ul>
       <h3>Кому подходит</h3>
       <ul>
-        <li>Производствам IV–V класса опасности: мастерские, сборка, пищевые цеха, лаборатории.</li>
-        <li>Дистрибьюторам и интернет-магазинам: хранение и комплектация заказов рядом с покупателем.</li>
-        <li>Сервисным компаниям и шоурумам: витрина, офис и склад под одной крышей.</li>
+        <li>Компаниям, которым нужно помещение под производство, склад, сервис или шоурум.</li>
+        <li>Инвесторам: объекты для сдачи в аренду и готовый арендный бизнес.</li>
+        <li>Агентам: подборка объектов с планировками и ценами для клиентов.</li>
       </ul>
       <h3>На что смотреть при выборе</h3>
       <ul>
         <li>Высота потолка и нагрузка на пол — определяют, какое оборудование встанет.</li>
-        <li>Электрическая мощность на секцию и возможность её увеличить.</li>
+        <li>Электрическая мощность и возможность её увеличить.</li>
         <li>Подъезд для грузовиков и еврофур, размер ворот.</li>
         <li>Форма владения: собственность или аренда, состав платежей за эксплуатацию.</li>
       </ul>
@@ -129,13 +137,13 @@
         <button type="button" class="pill" id="copy-phone">Скопировать номер</button>
       </div>
     </div>
-    <p class="footer-note">Light Industrial · Санкт-Петербург. Информация на сайте не является публичной офертой.</p>
+    <p class="footer-note">Коммерческая недвижимость · Санкт-Петербург и Ленинградская область. Информация на сайте не является публичной офертой.</p>
   </div>
 </footer>
 
 <div class="modal" id="modal" hidden></div>
 
-<script src="assets/js/data.js?v=202611131056"></script>
-<script src="assets/js/app.js?v=202611131056"></script>
+<script src="assets/js/data.js?v=202611190846"></script>
+<script src="assets/js/app.js?v=202611190846"></script>
 </body>
 </html>

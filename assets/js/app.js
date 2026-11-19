@@ -27,11 +27,12 @@
   function has(l, d) { return l.deal.indexOf(d) >= 0; }
 
   /* ---------- state ---------- */
-  var st = { limit: 24, view: "objects", layout: "list", sort: "default", deal: "all", areaMin: null, areaMax: null, unit: "m", priceMin: null, priceMax: null, object: "all", mapObj: null };
+  var st = { limit: 24, view: "objects", layout: "list", sort: "default", deal: "all", areaMin: null, areaMax: null, unit: "m", priceMin: null, priceMax: null, object: "all", type: "all", mapObj: null };
   try { var saved = JSON.parse(localStorage.getItem("li-layout") || "null"); if (saved) st.layout = saved; } catch (e) {}
 
   function lotPasses(l) {
     if (st.object !== "all" && l.object !== st.object) return false;
+    if (st.type !== "all" && OBJ[l.object].type !== st.type) return false;
     if (st.deal !== "all" && !has(l, st.deal)) return false;
     if (st.areaMin != null && l.area < st.areaMin) return false;
     if (st.areaMax != null && l.area > st.areaMax) return false;
@@ -95,7 +96,7 @@
     if (s.rent < Infinity) price.push("аренда " + (lots.length > 1 ? "от " : "") + fmt(s.rent) + " ₽/м² в месяц");
     else if (s.rentT) price.push("аренда " + fmt(s.rentT) + " ₽ в месяц");
     return '<article class="card ocard" data-obj="' + o.id + '">' +
-      '<div class="card-media">' + slider(o.photos, o.name) + '<div class="tags">' + dealTags(Object.keys(s.deals)) + "</div></div>" +
+      '<div class="card-media">' + slider(o.photos, o.name) + '<div class="tags"><span class="tag tag-type">' + esc(o.type) + '</span>' + dealTags(Object.keys(s.deals)) + "</div></div>" +
       '<div class="card-body">' +
       '<h3 class="card-name"><a href="#obj-' + o.id + '">' + esc(o.name) + "</a></h3>" +
       '<div class="card-area num">' + (s.min === s.max ? atHtml(s.min, o.unit) : (sot(o) ? fa(s.min / 100) + " — " + atHtml(s.max, o.unit) : fa(s.min) + " — " + atHtml(s.max))) + "</div>" +
@@ -165,7 +166,7 @@
       var seen = {}; mapObjs = [];
       arr.forEach(function (l) { if (!seen[l.object]) { seen[l.object] = 1; mapObjs.push(OBJ[l.object]); } });
     }
-    var title = st.deal === "sale" ? "Продажа помещений Light Industrial" : st.deal === "rent" ? "Аренда помещений Light Industrial" : "Light Industrial в Санкт-Петербурге";
+    var title = st.deal === "sale" ? "Продажа коммерческой недвижимости" : st.deal === "rent" ? "Аренда коммерческой недвижимости" : "Коммерческая недвижимость в Санкт-Петербурге и Ленинградской области";
     var seg = function (name, val, label) { return '<button type="button" class="seg-btn" data-' + name + '="' + val + '" aria-pressed="' + (st[name] === val) + '">' + label + "</button>"; };
     var empty = '<div class="empty"><p>Под эти условия ничего не нашлось.</p><button type="button" class="btn btn-ghost" data-reset>Сбросить фильтры</button></div>';
     app.innerHTML = crumbs([[title]]) +
@@ -204,7 +205,7 @@
     var thumbs = o.gallery.map(function (g, i) { return '<button type="button" data-src="' + g + '" aria-label="Фото ' + (i + 1) + '"' + (i ? "" : ' aria-current="true"') + '><img src="' + g + '" alt="" loading="lazy"></button>'; }).join("");
     app.innerHTML = crumbs([["Объекты", "#"], [o.name]]) +
       '<div class="obj-head"><div><h1>' + esc(o.name) + '</h1><p class="obj-addr">' + PIN + esc(o.address) + "</p></div>" +
-      '<div class="tags tags-static">' + dealTags(Object.keys(s.deals)) + "</div></div>" +
+      '<div class="tags tags-static"><span class="tag tag-type">' + esc(o.type) + '</span>' + dealTags(Object.keys(s.deals)) + "</div></div>" +
       '<div class="obj-top"><div class="gallery"><div class="gallery-main"><img id="g-main" src="' + o.gallery[0] + '" alt="' + esc(o.name) + '"></div><div class="thumbs">' + thumbs + "</div></div>" +
       '<aside class="obj-aside"><div class="aside-card">' +
       '<div class="aside-area num">' + (s.min === s.max ? "" : (sot(o) ? fa(s.min / 100) : fa(s.min)) + " — ") + atHtml(s.max, o.unit) + "</div>" +
@@ -366,18 +367,20 @@
 
   /* filters */
   var sel = $("f-object");
-  sel.innerHTML = '<option value="all">Все технопарки</option>' + S.objects.map(function (o) { return '<option value="' + o.id + '">' + esc(o.name) + "</option>"; }).join("");
+  var TYPES = []; S.objects.forEach(function (o) { if (TYPES.indexOf(o.type) < 0) TYPES.push(o.type); });
+  $("f-type").innerHTML = '<option value="all">Все типы</option>' + TYPES.map(function (t) { return '<option value="' + esc(t) + '">' + esc(t) + '</option>'; }).join("");
+  sel.innerHTML = '<option value="all">Все объекты</option>' + S.objects.map(function (o) { return '<option value="' + o.id + '">' + esc(o.name) + "</option>"; }).join("");
   function syncForm() {
-    $("f-deal").value = st.deal; $("f-object").value = st.object; $("f-price-unit").value = st.unit;
+    $("f-deal").value = st.deal; $("f-object").value = st.object; $("f-type").value = st.type; $("f-price-unit").value = st.unit;
     $("f-area-min").value = st.areaMin == null ? "" : st.areaMin; $("f-area-max").value = st.areaMax == null ? "" : st.areaMax;
     $("f-price-min").value = st.priceMin == null ? "" : st.priceMin; $("f-price-max").value = st.priceMax == null ? "" : st.priceMax;
   }
   function readForm() {
-    st.deal = $("f-deal").value; st.object = $("f-object").value; st.unit = $("f-price-unit").value;
+    st.deal = $("f-deal").value; st.object = $("f-object").value; st.type = $("f-type").value; st.unit = $("f-price-unit").value;
     st.areaMin = num($("f-area-min").value); st.areaMax = num($("f-area-max").value);
     st.priceMin = num($("f-price-min").value); st.priceMax = num($("f-price-max").value);
   }
-  function resetFilters() { st.deal = "all"; st.object = "all"; st.unit = "m"; st.areaMin = st.areaMax = st.priceMin = st.priceMax = null; syncForm(); }
+  function resetFilters() { st.deal = "all"; st.object = "all"; st.type = "all"; st.unit = "m"; st.areaMin = st.areaMax = st.priceMin = st.priceMax = null; syncForm(); }
   function onFilter() {
     readForm(); st.limit = 24;
     if (/^#obj-/.test(location.hash)) { location.hash = st.view; return; }
@@ -413,7 +416,7 @@
   $("footer-cols").innerHTML =
     '<div><h4>Объекты</h4>' + S.objects.map(function (o) { return '<a href="#obj-' + o.id + '">' + esc(o.name) + "</a>"; }).join("") + "</div>" +
     '<div><h4>Предложения</h4><a href="#" data-nav="sale">Продажа помещений</a><a href="#" data-nav="rent">Аренда помещений</a><a href="#offers">Все предложения</a></div>' +
-    '<div><h4>Покупателям и инвесторам</h4><a href="#obj-lit">Рассрочка и ипотека — Технопарк l618</a><a href="#about">Что такое Light Industrial</a></div>' +
+    '<div><h4>Покупателям и инвесторам</h4><a href="#obj-lit">Рассрочка и ипотека — Технопарк l618</a><a href="#about">О каталоге</a></div>' +
     '<div><h4>Отдел продаж</h4><a class="js-phone" href="' + S.phoneHref + '">' + S.phone + "</a></div>";
 
   /* copy phone */
