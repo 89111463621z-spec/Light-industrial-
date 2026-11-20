@@ -417,7 +417,7 @@
     '<div><h4>Объекты</h4>' + S.objects.map(function (o) { return '<a href="#obj-' + o.id + '">' + esc(o.name) + "</a>"; }).join("") + "</div>" +
     '<div><h4>Предложения</h4><a href="#" data-nav="sale">Продажа помещений</a><a href="#" data-nav="rent">Аренда помещений</a><a href="#offers">Все предложения</a></div>' +
     '<div><h4>Покупателям и инвесторам</h4><a href="#obj-lit">Рассрочка и ипотека — Технопарк l618</a><a href="#about">О каталоге</a></div>' +
-    '<div><h4>Отдел продаж</h4><a class="js-phone" href="' + S.phoneHref + '">' + S.phone + "</a></div>";
+    '<div><h4>Отдел продаж Александровой</h4><a class="js-phone" href="' + S.phoneHref + '">' + S.phone + "</a></div>";
 
   /* copy phone */
   $("copy-phone").addEventListener("click", function () {
